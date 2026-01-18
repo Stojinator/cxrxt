@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CxRxT – Official</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -12,7 +12,19 @@
       background: radial-gradient(circle at top, #0f0f0f, #000);
       color: #f5f5f5;
       line-height: 1.6;
+      overflow-x: hidden;
     }
+
+    /* subtle animated grain */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="120" height="120" filter="url(%23n)" opacity="0.035"/></svg>');
+      pointer-events: none;
+      z-index: 999;
+    }
+
     header {
       min-height: 100vh;
       display: flex;
@@ -20,71 +32,177 @@
       justify-content: center;
       text-align: center;
       padding: 2rem;
+      position: relative;
     }
+
     header h1 {
+      font-family: 'Instrument Serif', serif;
       font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 800;
-      letter-spacing: 0.2em;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-shadow: 0 0 25px rgba(255,255,255,0.15);
     }
+
     header p {
       margin-top: 1rem;
       font-weight: 300;
-      opacity: 0.8;
+      opacity: 0.75;
     }
+
     .btn {
       display: inline-block;
-      margin-top: 2rem;
-      padding: 0.75rem 2rem;
+      margin-top: 2.5rem;
+      padding: 0.85rem 2.5rem;
       border: 1px solid #fff;
       color: #fff;
       text-decoration: none;
       text-transform: uppercase;
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
-      transition: all 0.2s ease;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.2s ease;
     }
-    .btn:hover { background: #fff; color: #000; }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #fff;
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+      z-index: -1;
+    }
+
+    .btn:hover { color: #000; }
+    .btn:hover::before { transform: translateX(0); }
 
     section {
-      padding: 5rem 2rem;
+      padding: 6rem 2rem;
       max-width: 1100px;
       margin: auto;
     }
+
     h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
+      font-size: 2.3rem;
+      margin-bottom: 2rem;
       font-weight: 700;
+      letter-spacing: 0.1em;
     }
+
     .music iframe {
       width: 100%;
       height: 380px;
-      border: none;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
     }
+
     .links {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
       margin-top: 2rem;
     }
+
     .links a {
       border: 1px solid #333;
-      padding: 1.5rem;
+      padding: 1.75rem;
       text-align: center;
       text-decoration: none;
       color: #fff;
-      transition: 0.2s;
+      letter-spacing: 0.15em;
+      font-size: 0.8rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
-    .links a:hover { border-color: #fff; }
+
+    .links a::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.08), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .links a:hover {
+      border-color: #fff;
+      transform: translateY(-4px);
+    }
+
+    .links a:hover::after { transform: translateX(100%); }
+
+    /* news */
+    #news .news-item {
+      border-left: 2px solid #333;
+      padding-left: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .news-date {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      opacity: 0.6;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    #news h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
 
     footer {
-      padding: 2rem;
+      padding: 3rem 2rem;
       text-align: center;
-      font-size: 0.8rem;
-      opacity: 0.5;
+      font-size: 0.75rem;
+      opacity: 0.45;
+      letter-spacing: 0.15em;
     }
+
+    .menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -220px;
+  width: 200px;
+  height: 100%;
+  background: #000;
+  padding: 4rem 1.5rem;
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+.side-menu a {
+  display: block;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+  color: #fff;
+  letter-spacing: 0.15em;
+}
+
+.side-menu.open {
+  left: 0;
+}
+
   </style>
 </head>
 <body>
+
+  <!-- MENU -->
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <nav class="side-menu" id="menu">
+    <a href="index.html">Home</a>
+    <a href="news.html">News</a>
+  </nav>
 
   <header>
     <div>
@@ -104,28 +222,30 @@
 
   <section id="music" class="music">
     <h2>Music</h2>
-    <!-- Replace the src with your Spotify / SoundCloud embed -->
     <iframe src="https://open.spotify.com/embed/artist/7F8kaXYsZGYnmaFtoaQZtF"></iframe>
   </section>
 
   <section id="links">
     <h2>Links</h2>
     <div class="links">
-      <a href="https://open.spotify.com/artist/7F8kaXYsZGYnmaFtoaQZtF" target="_blank" rel="noopener">Spotify</a>
-      <a href="https://music.apple.com/de/artist/cxrxt/1845240674" target="_blank" rel="noopener">Apple Music</a>
-      <a href="https://soundcloud.com/carrested" target="_blank" rel="noopener">SoundCloud</a>
-      <a href="https://www.instagram.com/carrrest/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://www.tiktok.com/@carrrest" target="_blank" rel="noopener">TikTok</a>
-      <a href="https://www.youtube.com/@Carrres" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://open.spotify.com/artist/7F8kaXYsZGYnmaFtoaQZtF" target="_blank">Spotify</a>
+      <a href="https://music.apple.com/de/artist/cxrxt/1845240674" target="_blank">Apple Music</a>
+      <a href="https://soundcloud.com/carrested" target="_blank">SoundCloud</a>
+      <a href="https://www.instagram.com/carrrest/" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@carrrest" target="_blank">TikTok</a>
+      <a href="https://www.youtube.com/@Carrres" target="_blank">YouTube</a>
     </div>
   </section>
 
   <footer>
-    © <span id="year"></span> Dxrkknight. All rights reserved.
+    © <span id="year"></span> Dxrkknight Records. All rights reserved.
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('open');
+    }
   </script>
 
 </body>
