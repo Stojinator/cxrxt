@@ -39,27 +39,26 @@ body::after {
 }
 
 .side-menu {
-  position: fixed;
-  top: 0;
-  left: -220px;
-  width: 200px;
-  height: 100%;
-  background: #000;
-  padding: 4rem 1.5rem;
-  transition: 0.3s;
-  z-index: 1000;
-}
-
-.side-menu a {
-  display: block;
-  margin-bottom: 1.5rem;
-  text-decoration: none;
-  color: #fff;
-  letter-spacing: 0.15em;
-  font-size: 0.85rem;
-}
-
-.side-menu.open { left: 0; }
+      position: fixed;
+      top: 0;
+      left: -220px;
+      width: 200px;
+      height: 100%;
+      background: linear-gradient(180deg, #000, #050505);
+      padding: 4rem 1.5rem;
+      transition: 0.3s;
+      z-index: 1000;
+    }
+    .side-menu a {
+      display: block;
+      margin-bottom: 1.5rem;
+      text-decoration: none;
+      color: #fff;
+      letter-spacing: 0.15em;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .side-menu a:hover { opacity: 0.7; transform: translateX(4px); }
+    .side-menu.open { left: 0; }
 
 /* layout */
 header {
