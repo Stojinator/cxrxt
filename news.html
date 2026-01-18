@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CxRxT – News</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top, #0f0f0f, #000);
+  color: #f5f5f5;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* grain */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4"/></filter><rect width="120" height="120" filter="url(%23n)" opacity="0.035"/></svg>');
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* menu */
+.menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -220px;
+  width: 200px;
+  height: 100%;
+  background: #000;
+  padding: 4rem 1.5rem;
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+.side-menu a {
+  display: block;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+  color: #fff;
+  letter-spacing: 0.15em;
+  font-size: 0.85rem;
+}
+
+.side-menu.open { left: 0; }
+
+/* layout */
+header {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+header h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+}
+
+section {
+  padding: 6rem 2rem;
+  max-width: 1100px;
+  margin: auto;
+}
+
+h2 {
+  font-size: 2.3rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+/* filter */
+.filter {
+  margin-bottom: 3rem;
+}
+
+.filter input {
+  background: transparent;
+  border: 1px solid #333;
+  padding: 0.8rem 1.2rem;
+  color: #fff;
+  width: 260px;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+}
+
+.filter input::placeholder { color: #777; }
+
+/* news */
+.news-item {
+  border-left: 2px solid #333;
+  padding-left: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.news-date {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  opacity: 0.6;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.news-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+footer {
+  padding: 3rem 2rem;
+  text-align: center;
+  font-size: 0.75rem;
+  opacity: 0.45;
+  letter-spacing: 0.15em;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MENU -->
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+<nav class="side-menu" id="menu">
+  <a href="index.html">Home</a>
+  <a href="news.html">News</a>
+</nav>
+
+<header>
+  <h1>NEWS</h1>
+</header>
+
+<section>
+
+  <div class="filter">
+    <input type="number" id="yearFilter" placeholder="SEARCH YEAR (2026)" oninput="filterNews()">
+  </div>
+
+  <div class="news-item" data-year="2026">
+    <span class="news-date">2026-01-18</span>
+    <h3>News Update!</h3>
+    <p>The official CxRxT website has a News tab!</p>
+  </div>
+  
+</section>
+
+<footer>
+  © <span id="year"></span> Dxrkknight Records
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('menu').classList.toggle('open');
+}
+
+function filterNews() {
+  const year = document.getElementById('yearFilter').value;
+  document.querySelectorAll('.news-item').forEach(item => {
+    item.style.display = (!year || item.dataset.year === year) ? 'block' : 'none';
+  });
+}
+
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
