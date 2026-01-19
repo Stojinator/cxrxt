@@ -16,6 +16,8 @@ body {
   color: #f5f5f5;
   line-height: 1.6;
   overflow-x: hidden;
+  background: #000; /* fallback */
+  background: radial-gradient(circle at top, #0f0f0f, #000); /* subtle gradient */
 }
 
 /* grain */
@@ -187,6 +189,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 </body>
 </html>
+
 
 
 
