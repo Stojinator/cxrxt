@@ -10,6 +10,18 @@
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+      html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: #000; /* solid black fallback */
+      color: #f5f5f5;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+  
 body {
   font-family: 'Inter', sans-serif;
   background: radial-gradient(circle at top, #0f0f0f, #000);
@@ -189,6 +201,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 </body>
 </html>
+
 
 
 
